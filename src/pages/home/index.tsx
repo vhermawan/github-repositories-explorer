@@ -1,22 +1,41 @@
 import SearchForm from "@/components/SearchForm";
 import { useState } from "react";
+import { useSearchUsers, useUserRepositories } from "./hooks/useGithubUsers";
+import UserList from "@/components/UserList";
+import type { User } from "@/types/model";
 
 export default function Home(){
 	const [searchQuery, setSearchQuery] = useState('');
+	const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+	const { 
+    data: users = {
+			items: [],
+			incomplete_results: false,
+			totalCount: 0
+		},
+    isFetching: isLoadingUsers
+  } = useSearchUsers(searchQuery);
+
+	 const { 
+    data: repositories = [], 
+    isFetching: isLoadingRepos,
+  } = useUserRepositories(selectedUser?.login || '');
 
 	const handleSearch = (query: string) => {
     setSearchQuery(query);
-    // setSearchInitiated(true);
-    // setSelectedUser(null);
+    setSelectedUser(null);
   };
 
-	//add reset query when the query is 
+	const handleUserSelect = (user: User) => {
+    setSelectedUser(user);
+  };
 
 	return (
 		<div className='flex justify-center items-center'>
-			 <div className="container py-6 mx-auto px-4 max-w-4xl">
+			 <div className="container py-6 mx-auto md:px-4 md:max-w-4xl">
 				<header className="text-center mb-8">
-          <h1 className="text-5xl font-bold">GitHub Repositories Explorer</h1>
+          <h1 className="text-3xl md:text-5xl font-bold">GitHub Repositories Explorer</h1>
           <p className="text-muted-foreground mt-2">
             Search for GitHub users and explore their repositories
           </p>
@@ -24,10 +43,17 @@ export default function Home(){
 
 				<SearchForm 
           onSearch={handleSearch} 
-          isLoading={false} 
+          isLoading={isLoadingUsers} 
         />
 				{searchQuery ? <p>Showing users for "{searchQuery}"</p> : null}
 
+				<UserList 
+					users={searchQuery ? users.items : []} 
+					onUserSelect={handleUserSelect} 
+					isLoading={isLoadingUsers}
+					repositories={repositories}
+					isLoadingRepos={isLoadingRepos}
+				/>
 
 				<footer className="mt-8 text-center text-sm text-muted-foreground">
           <p>GitHub Repositories Explorer &copy; {new Date().getFullYear()}</p>
