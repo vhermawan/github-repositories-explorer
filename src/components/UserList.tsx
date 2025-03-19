@@ -29,7 +29,7 @@ const UserList: React.FC<UserListProps> = ({
         <CardContent className="space-y-4">
           {Array(3).fill(0).map((_, i) => (
             <div key={i} className="flex items-center gap-3">
-              <Skeleton className="h-10 w-10 rounded-full" />
+              <Skeleton data-testid="user-skeleton" className="h-10 w-10 rounded-full" />
               <Skeleton className="h-4 w-full" />
             </div>
           ))}
@@ -80,7 +80,7 @@ const UserList: React.FC<UserListProps> = ({
                   </div>
                 </AccordionTrigger>
                 {isLoadingRepos ? (
-                  <AccordionContent>
+                  <AccordionContent data-testid="repo-skeleton">
                     <ul className='mt-4 ml-4 space-y-2 p-4'>
                       {Array(3).fill(0).map((_, i) => (
                         <li key={i} className="flex justify-between  gap-2">

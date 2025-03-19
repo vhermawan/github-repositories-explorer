@@ -45,7 +45,7 @@ export default function Home(){
           onSearch={handleSearch} 
           isLoading={isLoadingUsers} 
         />
-				{searchQuery ? <p>Showing users for "{searchQuery}"</p> : null}
+				{searchQuery ? <p data-testid="search-query">Showing users for "{searchQuery}"</p> : null}
 
 				<UserList 
 					users={searchQuery ? users.items : []} 

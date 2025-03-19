@@ -66,6 +66,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
         </div>
         <Button 
           type="submit" 
+          data-testid="btn-search"
           className='bg-red-400 hover:bg-red-500'
           disabled={!query.trim() || isLoading}
         >
