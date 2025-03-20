@@ -15,7 +15,7 @@ This application allows users to search for GitHub users and explore their repos
 - Repository listing for selected users
 - Responsive design for mobile and desktop views
 - Error handling with user-friendly messages
-- Loading states for better UX
+- Loading states with skeleton for better UX
 - Keyboard navigation support
 
 ## Technologies Used
@@ -58,7 +58,9 @@ The application is deployed on GitHub Pages and can be accessed at: [https://git
    bun
    ```
 
-3. Start the development server:
+3. Copy `env.example` to `.env` and fill in the correct URLs and other necessary environment variables.
+
+4. Start the development server:
 
    ```bash
    npm run dev
@@ -68,7 +70,7 @@ The application is deployed on GitHub Pages and can be accessed at: [https://git
    bun dev
    ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+5. Open your browser and navigate to `http://localhost:5173`
 
 ## API Usage
 
@@ -103,7 +105,6 @@ yarn test
 - Add sorting options for repositories
 - Implement filtering capabilities
 - Add dark mode support
-- Add more tests for better coverage
 
 ## License
 
