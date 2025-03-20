@@ -29,7 +29,7 @@ const UserList: React.FC<UserListProps> = ({
         <CardContent className="space-y-4">
           {Array(3).fill(0).map((_, i) => (
             <div key={i} className="flex items-center gap-3">
-              <Skeleton data-testid="user-skeleton" className="h-10 w-10 rounded-full" />
+              <Skeleton className="h-10 w-10 rounded-full" data-testid={`user-skeleton-${i}`} />
               <Skeleton className="h-4 w-full" />
             </div>
           ))}
@@ -56,7 +56,7 @@ const UserList: React.FC<UserListProps> = ({
                 value={user.login}
                 className='p-4 cursor-pointer transition-colors'
               >
-                <AccordionTrigger onClick={() => onUserSelect(user)}>
+                <AccordionTrigger onClick={() => onUserSelect(user)}  data-testid={`selection-user-${user.login}`}>
                   <div className='flex justify-between'>
                     <div className="flex items-center align-top gap-5">
                       <img 
@@ -69,6 +69,7 @@ const UserList: React.FC<UserListProps> = ({
                         <a 
                           href={user.html_url}
                           target="_blank"
+                          data-testid={`profile-link-${user.login}`}
                           rel="noopener noreferrer"
                           className="text-xs text-muted-foreground hover:underline"
                           onClick={(e) => e.stopPropagation()}
@@ -85,7 +86,7 @@ const UserList: React.FC<UserListProps> = ({
                       {Array(3).fill(0).map((_, i) => (
                         <li key={i} className="flex justify-between  gap-2">
                           <div className='flex gap-4 w-full'>
-                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-full" data-testid={`repo-skeleton-${i}`}/>
                           </div>
                           <div className='flex gap-2'>
                             <Skeleton className="h-4 w-4" />

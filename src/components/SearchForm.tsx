@@ -57,6 +57,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
           {query.trim() && (
             <button
               type="button"
+              data-testid="btn-clear"
               className="absolute right-2 top-2 p-0 bg-white"
               onClick={handleClear}
             >
