@@ -1,54 +1,93 @@
-# React + TypeScript + Vite
+# GitHub Repositories Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This application allows users to search for GitHub users and explore their repositories. Users can:
+- Search for up to 5 GitHub users with usernames similar to the input value
+- Select a user to view all their public repositories
+- Click on repository names to visit them on GitHub
 
-Currently, two official plugins are available:
+## Features
+- User search functionality with GitHub API integration
+- Display of user search results with avatars
+- Repository listing for selected users
+- Responsive design for mobile and desktop views
+- Error handling with user-friendly messages
+- Loading states for better UX
+- Keyboard navigation support
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+- React 19
+- TypeScript
+- Vite (for fast development and building)
+- GitHub REST API v3
+- Shadcn UI
+- Axios
 
-## Expanding the ESLint configuration
+## Live Demo
+The application is deployed on GitHub Pages and can be accessed at: [https://github-repositories-explorer-alpha.vercel.app/](https://github-repositories-explorer-alpha.vercel.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation and Setup
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn or bun
+- In this project is use bun
+
+### Local Development
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/github-repositories-explorer.git
+   cd github-repositories-explorer
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   bun
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   bun dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## API Usage
+This application uses the GitHub REST API v3. The specific endpoints used are:
+- `GET /search/users?q={query}&per_page=5` - To search for users
+- `GET /users/{username}/repos` - To get a user's repositories
+
+## UX Features
+- Keyboard support:
+  - Press Enter to submit search
+  - Press Escape to clear search input
+- Skeleton indicators for search operations
+- Error handling with friendly messages
+- Responsive design for all device sizes
+- Visual feedback for selected users
+
+## Testing
+To run the tests:
+```bash
+npm run test
+# or
+yarn test
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Future Improvements
+- Add pagination for repositories
+- Add sorting options for repositories
+- Implement filtering capabilities
+- Add dark mode support
+- Add more tests for better coverage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## License
+MIT
