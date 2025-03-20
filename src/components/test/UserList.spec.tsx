@@ -123,6 +123,36 @@ describe('UserList', () => {
     )
   })
 
+  it('renders empty repositories when user is selected', async () => {
+    const users: User[] = [
+      {
+        id: 1,
+        login: 'testuser',
+        avatar_url: 'https://example.com/avatar1.jpg',
+        html_url: 'https://example.com/testuser1',
+      },
+    ]
+
+    render(
+      <UserList
+        users={users}
+        onUserSelect={vi.fn()}
+        isLoading={false}
+        isLoadingRepos={false}
+        repositories={[]}
+      />,
+    )
+
+    const userLink = screen.getByTestId('selection-user-testuser')
+    fireEvent.click(userLink)
+
+    await waitFor(() =>
+      expect(
+        screen.getByText('No repositories found for this user.'),
+      ).toBeInTheDocument(),
+    )
+  })
+
   it('renders skeleton state for repositories when isLoadingRepos is true', async () => {
     const users: User[] = [
       {

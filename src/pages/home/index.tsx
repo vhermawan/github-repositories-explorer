@@ -36,7 +36,8 @@ export default function Home() {
   }
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex relative justify-center items-center">
+      <div className="absolute top-20 right-0 md:-right-28 w-[250px] h-[250px] bg-[#9F1723] rounded-full blur-[920px] opacity-90 z-0"></div>
       <div className="container relative py-6 mx-auto md:px-4 md:max-w-4xl">
         <header className="text-center mb-8">
           <motion.h1
@@ -64,13 +65,9 @@ export default function Home() {
 
         {(usersError || reposError) && (
           <Alert variant="destructive" className="mb-6">
-            <AlertTitle>Error</AlertTitle>
+            <AlertTitle className="font-bold">Error</AlertTitle>
             <AlertDescription>
-              {usersError instanceof Error
-                ? usersError.message
-                : reposError instanceof Error
-                  ? reposError.message
-                  : 'An unknown error occurred'}
+              Failed to get {usersError ? 'users' : 'repositories'} data
             </AlertDescription>
           </Alert>
         )}
@@ -87,6 +84,7 @@ export default function Home() {
           <p>GitHub Repositories Explorer &copy; {new Date().getFullYear()}</p>
         </footer>
       </div>
+      <div className="absolute top-36 -left-64 w-[400px] h-[400px] bg-[#9F1723] rounded-full blur-[120px] opacity-10 md:opacity-70 z-0"></div>
     </div>
   )
 }
