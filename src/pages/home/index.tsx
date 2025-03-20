@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSearchUsers, useUserRepositories } from "./hooks/useGithubUsers";
 import UserList from "@/components/UserList";
 import type { User } from "@/types/model";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function Home(){
 	const [searchQuery, setSearchQuery] = useState('');
@@ -14,12 +15,14 @@ export default function Home(){
 			incomplete_results: false,
 			totalCount: 0
 		},
-    isFetching: isLoadingUsers
+    isFetching: isLoadingUsers,
+		error: usersError
   } = useSearchUsers(searchQuery);
 
 	 const { 
     data: repositories = [], 
     isFetching: isLoadingRepos,
+		error: reposError
   } = useUserRepositories(selectedUser?.login || '');
 
 	const handleSearch = (query: string) => {
@@ -46,6 +49,19 @@ export default function Home(){
           isLoading={isLoadingUsers} 
         />
 				{searchQuery ? <p data-testid="search-query">Showing users for "{searchQuery}"</p> : null}
+
+				 {(usersError || reposError) && (
+          <Alert variant="destructive" className="mb-6">
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              {usersError instanceof Error 
+                ? usersError.message 
+                : reposError instanceof Error 
+                  ? reposError.message 
+                  : 'An unknown error occurred'}
+            </AlertDescription>
+          </Alert>
+        )}
 
 				<UserList 
 					users={searchQuery ? users.items : []} 

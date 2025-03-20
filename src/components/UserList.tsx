@@ -4,6 +4,8 @@ import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Skeleton } from './ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import { FolderDot, Star } from 'lucide-react';
+import { ScrollArea } from "@/components/ui/scroll-area"
+
 
 interface UserListProps {
   users: User[];
@@ -76,8 +78,8 @@ const UserList: React.FC<UserListProps> = ({
                         >
                           View Profile
                         </a>
+                      </div>
                     </div>
-                  </div>
                   </div>
                 </AccordionTrigger>
                 {isLoadingRepos ? (
@@ -98,29 +100,31 @@ const UserList: React.FC<UserListProps> = ({
                   </AccordionContent>
                 ): (
                   <AccordionContent className='bg-accent rounded-md'>
-                    <ul className='flex flex-col mt-4 space-y-2 p-3'>
-                      {repositories.map((repository, i) => (
-                        <li key={i} className="flex gap-2 w-full">
-                          <div className='flex gap-2 w-11/12'>
-                            <div className='hidden md:block md:w-1/6'>
-                              <FolderDot />
+                    <ScrollArea className="h-[300px] mt-4">
+                      <ul className='flex flex-col space-y-2 p-3'>
+                        {repositories.map((repository, i) => (
+                          <li key={i} className="flex gap-2 w-full">
+                            <div className='flex gap-2 w-11/12'>
+                              <div className='hidden md:block md:w-1/6'>
+                                <FolderDot />
+                              </div>
+                              <div className='flex flex-col text-left w-5/6'>
+                                <h3 className="text-sm font-bold truncate w-40">
+                                  {repository.name}
+                                </h3>
+                                <p className='truncate w-40 md:w-96'>
+                                  {repository.description || 'No description'}
+                                </p>
+                              </div>
                             </div>
-                            <div className='flex flex-col text-left w-5/6'>
-                              <h3 className="text-sm font-bold truncate w-40">
-                                {repository.name}
-                              </h3>
-                              <p className='truncate w-40 md:w-96'>
-                                {repository.description || 'No description'}
-                              </p>
+                            <div className='flex gap-2 md:w-1/12'>
+                              <span>{repository.stargazers_count}</span>
+                              <Star size={20}/>
                             </div>
-                          </div>
-                          <div className='flex gap-2 md:w-1/12'>
-                            <span>{repository.stargazers_count}</span>
-                            <Star size={20}/>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
+                          </li>
+                        ))}
+                      </ul>
+                    </ScrollArea>
                   </AccordionContent>
                 )}
               </AccordionItem>
