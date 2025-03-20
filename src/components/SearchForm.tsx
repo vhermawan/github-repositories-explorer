@@ -1,49 +1,49 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { Search } from 'lucide-react';
-import { X } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react'
+import { Input } from './ui/input'
+import { Button } from './ui/button'
+import { Search } from 'lucide-react'
+import { X } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface SearchFormProps {
-  onSearch: (query: string) => void;
-  isLoading: boolean;
+  onSearch: (query: string) => void
+  isLoading: boolean
 }
 
 const variants = {
   hidden: { opacity: 0, x: -20 },
   visible: { opacity: 1, x: 0 },
-};
+}
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
-  const [query, setQuery] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    inputRef.current?.focus()
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('query', query, query.trim());
+    e.preventDefault()
+    console.log('query', query, query.trim())
     if (query.trim()) {
-      onSearch(query.trim());
+      onSearch(query.trim())
     }
-  };
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
-      setQuery('');
-      onSearch('');
-      inputRef.current?.focus();
+      setQuery('')
+      onSearch('')
+      inputRef.current?.focus()
     }
-  };
+  }
 
   const handleClear = () => {
-    setQuery('');
-    onSearch('');
-    inputRef.current?.focus();
-  };
+    setQuery('')
+    onSearch('')
+    inputRef.current?.focus()
+  }
 
   return (
     <motion.form
@@ -83,21 +83,20 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
             className="absolute right-2 top-2 p-0 bg-white"
             onClick={handleClear}
           >
-            <X size={20} className='text-muted-foreground' />
+            <X size={20} className="text-muted-foreground" />
           </motion.button>
         )}
       </div>
-      <Button 
-        type="submit" 
+      <Button
+        type="submit"
         data-testid="btn-search"
-        className='bg-red-400 hover:bg-red-500'
+        className="bg-red-400 hover:bg-red-500"
         disabled={!query.trim() || isLoading}
       >
         {isLoading ? 'Searching...' : 'Search'}
       </Button>
     </motion.form>
-  );
-};
+  )
+}
 
-export default SearchForm;
-
+export default SearchForm

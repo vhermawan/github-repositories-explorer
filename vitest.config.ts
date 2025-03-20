@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig } from "vitest/config";
+import { defineConfig } from 'vitest/config'
 import path from 'path'
 import react from '@vitejs/plugin-react'
 
@@ -8,7 +8,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: "./vitest.setup.ts",
+    setupFiles: './vitest.setup.ts',
     css: false,
     poolOptions: {
       threads: {
@@ -21,4 +21,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-});
+})

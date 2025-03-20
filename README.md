@@ -1,12 +1,15 @@
 # GitHub Repositories Explorer
 
 ## Overview
+
 This application allows users to search for GitHub users and explore their repositories. Users can:
+
 - Search for up to 5 GitHub users with usernames similar to the input value
 - Select a user to view all their public repositories
 - Click on repository names to visit them on GitHub
 
 ## Features
+
 - User search functionality with GitHub API integration
 - Display of user search results with avatars
 - Repository listing for selected users
@@ -16,6 +19,7 @@ This application allows users to search for GitHub users and explore their repos
 - Keyboard navigation support
 
 ## Technologies Used
+
 - React 19
 - TypeScript
 - Vite (for fast development and building)
@@ -24,23 +28,28 @@ This application allows users to search for GitHub users and explore their repos
 - Axios
 
 ## Live Demo
+
 The application is deployed on GitHub Pages and can be accessed at: [https://github-repositories-explorer-alpha.vercel.app/](https://github-repositories-explorer-alpha.vercel.app/)
 
 ## Installation and Setup
 
 ### Prerequisites
+
 - Node.js (v14 or higher)
 - npm or yarn or bun
 - In this project is use bun
 
 ### Local Development
+
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/github-repositories-explorer.git
    cd github-repositories-explorer
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    # or
@@ -50,6 +59,7 @@ The application is deployed on GitHub Pages and can be accessed at: [https://git
    ```
 
 3. Start the development server:
+
    ```bash
    npm run dev
    # or
@@ -61,11 +71,14 @@ The application is deployed on GitHub Pages and can be accessed at: [https://git
 4. Open your browser and navigate to `http://localhost:5173`
 
 ## API Usage
+
 This application uses the GitHub REST API v3. The specific endpoints used are:
+
 - `GET /search/users?q={query}&per_page=5` - To search for users
 - `GET /users/{username}/repos` - To get a user's repositories
 
 ## UX Features
+
 - Keyboard support:
   - Press Enter to submit search
   - Press Escape to clear search input
@@ -75,7 +88,9 @@ This application uses the GitHub REST API v3. The specific endpoints used are:
 - Visual feedback for selected users
 
 ## Testing
+
 To run the tests:
+
 ```bash
 npm run test
 # or
@@ -83,6 +98,7 @@ yarn test
 ```
 
 ## Future Improvements
+
 - Add pagination for repositories
 - Add sorting options for repositories
 - Implement filtering capabilities
@@ -90,4 +106,5 @@ yarn test
 - Add more tests for better coverage
 
 ## License
+
 MIT
