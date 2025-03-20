@@ -25,7 +25,6 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('query', query, query.trim())
     if (query.trim()) {
       onSearch(query.trim())
     }

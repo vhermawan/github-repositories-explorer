@@ -75,7 +75,6 @@ const createWrapper = () => {
 describe('Homepage', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-
     ;(useSearchUsers as unknown as ReturnType<typeof vi.fn>).mockReturnValue({
       data: { items: [], incomplete_results: false, totalCount: 0 },
       isFetching: false,
@@ -85,7 +84,6 @@ describe('Homepage', () => {
         totalCount: 0,
       }),
     })
-
     ;(
       useUserRepositories as unknown as ReturnType<typeof vi.fn>
     ).mockReturnValue({
@@ -167,7 +165,6 @@ describe('Homepage', () => {
       refetch: vi.fn(),
       promise: Promise.resolve(mockUsers),
     })
-
     ;(
       useUserRepositories as unknown as ReturnType<typeof vi.fn>
     ).mockReturnValue({
@@ -206,7 +203,6 @@ describe('Homepage', () => {
       refetch: vi.fn(),
       promise: Promise.resolve(mockUsers),
     })
-
     ;(
       useUserRepositories as unknown as ReturnType<typeof vi.fn>
     ).mockReturnValue({
