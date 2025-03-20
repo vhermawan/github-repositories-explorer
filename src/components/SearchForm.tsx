@@ -3,11 +3,17 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Search } from 'lucide-react';
 import { X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface SearchFormProps {
   onSearch: (query: string) => void;
   isLoading: boolean;
 }
+
+const variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0 },
+};
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
   const [query, setQuery] = useState('');
@@ -40,9 +46,20 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
   };
 
   return (
-    <div className='flex flex-col'>
-      <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
-        <div className="relative flex-1">
+    <motion.form
+      initial="hidden"
+      animate="visible"
+      variants={variants}
+      transition={{ duration: 0.2 }}
+      onSubmit={handleSubmit}
+      className="flex gap-2 mb-6"
+    >
+      <div className="relative flex-1">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.2 }}
+        >
           <Input
             ref={inputRef}
             type="text"
@@ -54,29 +71,33 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
             disabled={isLoading}
             className="pl-10"
           />
-          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-          {query.trim() && (
-            <button
-              type="button"
-              data-testid="btn-clear"
-              className="absolute right-2 top-2 p-0 bg-white"
-              onClick={handleClear}
-            >
-              <X size={20} className='text-muted-foreground' />
-            </button>
-          )}
-        </div>
-        <Button 
-          type="submit" 
-          data-testid="btn-search"
-          className='bg-red-400 hover:bg-red-500'
-          disabled={!query.trim() || isLoading}
-        >
-          {isLoading ? 'Searching...' : 'Search'}
-        </Button>
-      </form>
-    </div>
+        </motion.div>
+        <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+        {query.trim() && (
+          <motion.button
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.2 }}
+            type="button"
+            data-testid="btn-clear"
+            className="absolute right-2 top-2 p-0 bg-white"
+            onClick={handleClear}
+          >
+            <X size={20} className='text-muted-foreground' />
+          </motion.button>
+        )}
+      </div>
+      <Button 
+        type="submit" 
+        data-testid="btn-search"
+        className='bg-red-400 hover:bg-red-500'
+        disabled={!query.trim() || isLoading}
+      >
+        {isLoading ? 'Searching...' : 'Search'}
+      </Button>
+    </motion.form>
   );
 };
 
 export default SearchForm;
+

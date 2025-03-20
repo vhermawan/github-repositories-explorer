@@ -5,6 +5,7 @@ import { Skeleton } from './ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import { FolderDot, Star } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { motion } from 'framer-motion';
 
 
 interface UserListProps {
@@ -52,14 +53,18 @@ const UserList: React.FC<UserListProps> = ({
           </div>
         ) : (
           <Accordion type="single" collapsible>
-            {users.map((user) => (
+            {users.map((user, index) => (
               <AccordionItem
                 key={user.id}
                 value={user.login}
                 className='p-4 cursor-pointer transition-colors'
               >
                 <AccordionTrigger onClick={() => onUserSelect(user)}  data-testid={`selection-user-${user.login}`}>
-                  <div className='flex justify-between'>
+                  <motion.div className='flex justify-between'
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 * index}}
+                  >
                     <div className="flex items-center align-top gap-5">
                       <img 
                         src={user.avatar_url} 
@@ -80,7 +85,7 @@ const UserList: React.FC<UserListProps> = ({
                         </a>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </AccordionTrigger>
                 {isLoadingRepos ? (
                   <AccordionContent data-testid="repo-skeleton">
@@ -103,8 +108,12 @@ const UserList: React.FC<UserListProps> = ({
                     <ScrollArea className="h-[300px] mt-4">
                       <ul className='flex flex-col space-y-2 p-3'>
                         {repositories.map((repository, i) => (
-                          <li key={i} className="flex gap-2 w-full">
-                            <div className='flex gap-2 w-11/12'>
+                          <motion.li key={i} className="flex gap-2 w-full"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.15, delay: 0.1 * i }}
+                          >
+                            <div className='flex gap-2 w-10/12'>
                               <div className='hidden md:block md:w-1/6'>
                                 <FolderDot />
                               </div>
@@ -117,11 +126,11 @@ const UserList: React.FC<UserListProps> = ({
                                 </p>
                               </div>
                             </div>
-                            <div className='flex gap-2 md:w-1/12'>
+                            <div className='flex gap-2 md:w-2/12 justify-end'>
                               <span>{repository.stargazers_count}</span>
                               <Star size={20}/>
                             </div>
-                          </li>
+                          </motion.li>
                         ))}
                       </ul>
                     </ScrollArea>
