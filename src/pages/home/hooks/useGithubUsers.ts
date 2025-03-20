@@ -1,4 +1,4 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { getUserRepositories, getUsers } from "../query";
 import type { Users } from "@/types/users";
 import type { Repository } from "@/types/model";
