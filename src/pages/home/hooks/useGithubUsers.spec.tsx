@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react'
+import { renderHook, act, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useSearchUsers, useUserRepositories } from './useGithubUsers'
 import { getUsers, getUserRepositories } from '../query'
@@ -141,13 +141,17 @@ describe('useGithubUsers', () => {
         wrapper,
       })
 
-      // Wait for the query to complete
+      // Wait for the query to complete and data to be available
       await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 0))
+        await new Promise((resolve) => setTimeout(resolve, 100))
       })
 
       expect(getUserRepositories).toHaveBeenCalledWith('testuser')
-      expect(result.current.data).toEqual(mockRepositories)
+
+      // Wait for the data to be available and match expected result
+      await waitFor(() => {
+        expect(result.current.data).toEqual(mockRepositories)
+      })
     })
 
     it('should handle error state', async () => {
