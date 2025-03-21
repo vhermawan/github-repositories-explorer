@@ -87,7 +87,6 @@ This application uses the GitHub REST API v3. The specific endpoints used are:
 - Skeleton indicators for search operations
 - Error handling with friendly messages
 - Responsive design for all device sizes
-- Visual feedback for selected users
 
 ## Testing
 
