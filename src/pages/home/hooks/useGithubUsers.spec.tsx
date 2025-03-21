@@ -68,13 +68,22 @@ describe('useGithubUsers', () => {
         wrapper,
       })
 
-      // Wait for the query to complete
+      // Wait for the query to complete and data to be available
       await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 0))
+        await new Promise((resolve) => setTimeout(resolve, 100))
       })
 
       expect(getUsers).toHaveBeenCalledWith('testuser')
-      expect(result.current.data).toEqual(mockUsers)
+
+      // Wait for the data to be available and match expected result
+      await waitFor(
+        () => {
+          expect(result.current.data).toEqual(mockUsers)
+        },
+        {
+          timeout: 2000, // Increase timeout to ensure test has enough time to complete
+        },
+      )
     })
 
     it('should handle error state', async () => {
