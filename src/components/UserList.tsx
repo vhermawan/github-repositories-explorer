@@ -7,11 +7,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion'
-import { motion } from 'framer-motion'
 import UserCard from './UserCard'
 import RepositoryList from './RepositoryList'
 import RepositorySkeleton from './RepositorySkeleton'
 import UserSkeleton from './UserSkeleton'
+import EmptyState from './EmptyState'
 
 interface UserListProps {
   users: User[]
@@ -70,16 +70,7 @@ const UserList: React.FC<UserListProps> = ({
                     {repositories.length > 0 ? (
                       <RepositoryList repositories={repositories} />
                     ) : (
-                      <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.15, delay: 0.1 }}
-                        className="flex m-auto text-center p-4 mt-4"
-                      >
-                        <p className="text-muted-foreground font-bold">
-                          No repositories found for this user.
-                        </p>
-                      </motion.div>
+                      <EmptyState text="No repositories found for this user." />
                     )}
                   </AccordionContent>
                 )}
@@ -87,9 +78,7 @@ const UserList: React.FC<UserListProps> = ({
             ))}
           </Accordion>
         ) : (
-          <div className="py-8 text-center text-muted-foreground">
-            No users found. Try a different search term.
-          </div>
+          <EmptyState text="No users found. Try a different search term." />
         )}
       </CardContent>
     </Card>
