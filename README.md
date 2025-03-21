@@ -103,7 +103,7 @@ yarn test
 
 - Add pagination for repositories
 - Add sorting options for repositories
-- Implement filtering capabilities
+- Add redirect to detail repository
 - Add dark mode support
 
 ## License
