@@ -6,7 +6,7 @@ This application allows users to search for GitHub users and explore their repos
 
 - Search for up to 5 GitHub users with usernames similar to the input value
 - Select a user to view all their public repositories
-- Click on repository names to visit them on GitHub
+- Click on usernames to visit them on GitHub
 
 ## Features
 
