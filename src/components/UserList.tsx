@@ -58,6 +58,7 @@ const UserList: React.FC<UserListProps> = ({
                 <AccordionTrigger
                   onClick={() => onUserSelect(user)}
                   data-testid={`selection-user-${user.login}`}
+                  className="bg-accent rounded-md"
                 >
                   <UserCard user={user} index={index} />
                 </AccordionTrigger>
