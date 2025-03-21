@@ -35,7 +35,7 @@ The application is deployed on GitHub Pages and can be accessed at: [https://git
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v21 or higher)
 - npm or yarn or bun
 - In this project is use bun
 
@@ -55,7 +55,7 @@ The application is deployed on GitHub Pages and can be accessed at: [https://git
    # or
    yarn
    # or
-   bun
+   bun install
    ```
 
 3. Copy `env.example` to `.env` and fill in the correct URLs and other necessary environment variables.
