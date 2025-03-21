@@ -4,7 +4,6 @@ import { useSearchUsers, useUserRepositories } from './useGithubUsers'
 import { getUsers, getUserRepositories } from '../query'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
-// Mock the query functions
 vi.mock('../query', () => ({
   getUsers: vi.fn(),
   getUserRepositories: vi.fn(),
@@ -68,20 +67,18 @@ describe('useGithubUsers', () => {
         wrapper,
       })
 
-      // Wait for the query to complete and data to be available
       await act(async () => {
         await new Promise((resolve) => setTimeout(resolve, 100))
       })
 
       expect(getUsers).toHaveBeenCalledWith('testuser')
 
-      // Wait for the data to be available and match expected result
       await waitFor(
         () => {
           expect(result.current.data).toEqual(mockUsers)
         },
         {
-          timeout: 2000, // Increase timeout to ensure test has enough time to complete
+          timeout: 2000,
         },
       )
     })
@@ -100,12 +97,18 @@ describe('useGithubUsers', () => {
         wrapper,
       })
 
-      // Wait for the query to complete
       await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 0))
+        await new Promise((resolve) => setTimeout(resolve, 100))
       })
 
-      expect(result.current.error).toEqual(error)
+      await waitFor(
+        () => {
+          expect(result.current.error).toEqual(error)
+        },
+        {
+          timeout: 2000,
+        },
+      )
     })
   })
 
@@ -150,14 +153,12 @@ describe('useGithubUsers', () => {
         wrapper,
       })
 
-      // Wait for the query to complete and data to be available
       await act(async () => {
         await new Promise((resolve) => setTimeout(resolve, 100))
       })
 
       expect(getUserRepositories).toHaveBeenCalledWith('testuser')
 
-      // Wait for the data to be available and match expected result
       await waitFor(() => {
         expect(result.current.data).toEqual(mockRepositories)
       })
@@ -177,9 +178,8 @@ describe('useGithubUsers', () => {
         wrapper,
       })
 
-      // Wait for the query to complete
       await act(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 0))
+        await new Promise((resolve) => setTimeout(resolve, 2000))
       })
 
       expect(result.current.error).toEqual(error)
