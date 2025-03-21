@@ -1,5 +1,5 @@
 import { API } from '@/common/api'
-import { Repository } from '@/types/model'
+import type { Repository } from '@/types/model'
 import type { Users } from '@/types/users'
 
 export async function getUsers(username: string): Promise<Users> {

@@ -1,4 +1,4 @@
-import { User } from '@/types/model'
+import type { User } from '@/types/model'
 import { motion } from 'framer-motion'
 
 interface UserCardProps {

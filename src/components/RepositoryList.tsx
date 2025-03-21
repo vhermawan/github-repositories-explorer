@@ -1,4 +1,4 @@
-import { Repository } from '@/types/model'
+import type { Repository } from '@/types/model'
 import { motion } from 'framer-motion'
 import { FolderDot, Star } from 'lucide-react'
 import { ScrollArea } from './ui/scroll-area'
